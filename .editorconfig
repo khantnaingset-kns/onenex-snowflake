@@ -1,0 +1,34 @@
+root = true
+
+# Global settings
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+indent_size = 2
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Match TypeScript files
+[*.ts]
+indent_size = 2
+
+# Match JSON files
+[*.json]
+indent_size = 2
+
+# Match Markdown files
+[*.md]
+trim_trailing_whitespace = false
+
+# Match YAML files
+[*.yaml]
+indent_size = 2
+
+# Match JavaScript files
+[*.js]
+indent_size = 2
+
+# Match CSS, SCSS, and HTML
+[*.{css,scss,html}]
+indent_size = 2
