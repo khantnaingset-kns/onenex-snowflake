@@ -49,7 +49,7 @@ export class Snowflake {
    * @type {number}
    */
   /* c8 ignore end */
-  private SEQUENCE = 1;
+  _SEQUENCE = 1;
 
   /* c8 ignore start */
   /**
@@ -65,6 +65,16 @@ export class Snowflake {
   private readonly cached64BitZeros =
     '0000000000000000000000000000000000000000000000000000000000000000';
 
+  get getSequence(): number {
+    return this._SEQUENCE;
+  }
+
+  set setSequence(value: number) {
+    if (value < 0 || value >= 4096) {
+      throw new Error('SEQUENCE must be between 0 and 4095.');
+    }
+    this._SEQUENCE = value;
+  }
   generate({
     timestamp = Date.now(),
     shard_id = this.SHARD_ID,
@@ -77,8 +87,21 @@ export class Snowflake {
 
     let result = (BigInt(timestamp) - BigInt(this.EPOCH)) << BigInt(22);
     result = result | (BigInt(shard_id % 1024) << BigInt(12));
-    result = result | BigInt(this.SEQUENCE++ % 4096);
+    result = result | BigInt(this._SEQUENCE++ % 4096);
     return result.toString();
+  }
+
+  generateShortId({
+    timestamp = Date.now(),
+    shard_id = this.SHARD_ID,
+  }: {
+    timestamp?: Date | number;
+    shard_id?: number;
+  } = {}): string {
+    const fullSnowflake = this.generate({ timestamp, shard_id });
+
+    // Use the last 8 characters of the full Snowflake for the short ID
+    return fullSnowflake.slice(-8);
   }
 
   /**

@@ -1,6 +1,6 @@
 # OneNex Snowflake
 
-Library to help you create a Snowflake Id or parse the same. This solves the problem of generating unique identifiers at scale. (Fork from [theinternetfolks/snowflake](https://github.com/theinternetfolks/snowflake))
+Library to help you create a Snowflake Id or parse the same. This solves the problem of generating unique identifiers at scale. (Highly inspired from [theinternetfolks/snowflake](https://github.com/theinternetfolks/snowflake))
 
 ### What are Snowflakes?
 
@@ -61,6 +61,15 @@ console.log(snowflake.generate());
 // 6917062538869867520
 ```
 
+#### Shorter Version of Snowflake Generation
+
+```javascript
+import { snowflake } from "@onenex/snowflake";
+
+console.log(snowflake.generateShortId());
+// 71792129
+```
+
 #### Advanced Generation
 
 ```javascript
@@ -75,26 +84,6 @@ import { snowflake } from "@onenex/snowflake";
 
 console.log(snowflake.generate({ timestamp: 1649157035498, shard_id: 4 }));
 // 6917065950617407488
-```
-
-## API
-
-```
-static generate(
-    {
-        timestamp?: Date | number;
-        shard_id?: number;
-        epoch?: number;
-    }
-): string;
-```
-
-```
-static parse(snowflake: string | number | bigint): {
-    timestamp: number;
-    shard_id: number;
-    binary: string;
-};
 ```
 
 ## License

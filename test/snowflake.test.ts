@@ -23,7 +23,7 @@ const tests = [
 
 let snowFlake: Snowflake;
 
-describe('index', () => {
+describe('snowflake', () => {
   beforeAll(() => {
     snowFlake = new Snowflake();
   });
@@ -31,7 +31,7 @@ describe('index', () => {
   describe('generate', () => {
     it('should generate a snowflake', () => {
       for (const test of tests) {
-        snowFlake.SEQUENCE = test.sequence;
+        snowFlake.setSequence = test.sequence;
         expect(
           snowFlake
             .generate({
@@ -58,6 +58,31 @@ describe('index', () => {
         .fill(null)
         .map(() => {
           generated.push(snowFlake.generate());
+        });
+      expect(generated.length).toEqual(new Set(generated).size);
+    });
+  });
+
+  describe('generateShortId', () => {
+    it('should generate a short id from snowflake', () => {
+      for (const test of tests) {
+        snowFlake.setSequence = test.sequence;
+        const shortId = snowFlake.generateShortId({
+          timestamp: test.timestamp,
+          shard_id: test.shard_id,
+        });
+        expect(shortId.length).toBeLessThanOrEqual(8);
+        expect(shortId).toEqual(test.value.slice(-8));
+      }
+    });
+
+    it('should generate a unique short snowflake', () => {
+      const generated: string[] = [];
+
+      Array(1e6)
+        .fill(null)
+        .map(() => {
+          generated.push(snowFlake.generateShortId());
         });
       expect(generated.length).toEqual(new Set(generated).size);
     });
