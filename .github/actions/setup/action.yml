@@ -10,26 +10,21 @@ runs:
     - name: Setup Node
       uses: actions/setup-node@v4
       with:
-        node-version: "20.x"
+        node-version: "22.x"
 
     - name: Setup Pnpm
       uses: pnpm/action-setup@v4
       with:
         version: 9
 
-    - name: Get pnpm cache directory path
-      shell: bash
-      id: pnpm-cache-dir-path
-      run: echo "::set-output name=dir::$(pnpm store path)"
-
-    - name: Cache node modules
-      id: cache-pnpm
-      uses: actions/cache@v3
+    - name: Cache or Restore node modules
+      id: cache-or-restore
+      uses: actions/cache@v4
       with:
-        path: $ {{ steps.pnpm-cache-dir-path.outputs.dir }}
-        key: ${{ runner.os }}-build-${{ env.cache-name }}\
-          -${{ hashFiles('**/package-lock.json') }}
+        path: '**/node_modules'
+        key: ${{ runner.os }}-build-${{ hashFiles('**/pnpm-lock.yaml') }}
 
     - name: Install dependencies
+      if: steps.pnpm-cache-dir-path.outputs.cache-hit != 'true'
       shell: bash
       run: pnpm install --frozen-lockfile
