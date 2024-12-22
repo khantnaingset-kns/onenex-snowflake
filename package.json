@@ -5,6 +5,7 @@
   "main": "./dist/index.js",
   "scripts": {
     "test": "npx jest",
+    "build": "pnpm exec tsc",
     "eslint": "npx eslint . --fix",
     "prettier": "npx prettier . --check --write",
     "lint": "pnpm exec npm-run-all --parallel eslint prettier"
