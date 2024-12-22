@@ -26,7 +26,9 @@ runs:
       id: cache-or-restore
       uses: actions/cache@v3
       with:
-        path: $ {{ steps.pnpm-cache-dir-path.outputs.dir }}
+        path:
+          - ${{ steps.pnpm-cache-dir-path.outputs.dir }}
+          - node_modules
         key: ${{ runner.os }}-build-${{ hashFiles('**/pnpm-lock.yaml') }}
 
     - name: Install dependencies

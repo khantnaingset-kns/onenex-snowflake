@@ -38,13 +38,6 @@ jobs:
       - name: Setup
         uses: ./.github/actions/setup/
 
-      - name: Cache or Restore node modules
-        id: cache-or-restore
-        uses: actions/cache@v3
-        with:
-          path: $ {{ steps.pnpm-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-build-${{ hashFiles('**/pnpm-lock.yaml') }}
-
       - name: Build the code
         run: pnpm build
 
