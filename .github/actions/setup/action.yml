@@ -18,6 +18,7 @@ runs:
         version: 9
 
     - name: Get pnpm cache directory path
+      shell: bash
       id: pnpm-cache-dir-path
       run: echo "::set-output name=dir::$(pnpm store path)"
 
@@ -30,4 +31,5 @@ runs:
           -${{ hashFiles('**/package-lock.json') }}
 
     - name: Install dependencies
+      shell: bash
       run: pnpm install --frozen-lockfile
