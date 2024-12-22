@@ -1,6 +1,6 @@
 {
   "name": "onenex-snowflake",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Library to help you create a Snowflake Id or parse the same. This solves the problem of generating unique identifiers at scale by Onenex.",
   "main": "./dist/index.js",
   "scripts": {
