@@ -21,7 +21,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup
-        uses: ./.github/actions/setup.yml
+        uses: ./.github/actions/setup/
 
       - name: Lint
         run: |
@@ -36,7 +36,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup
-        uses: ./.github/actions/setup.yml
+        uses: ./.github/actions/setup/
 
       - name: Build the code
         run: pnpm build
@@ -49,7 +49,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup
-        uses: ./.github/actions/setup.yml
+        uses: ./.github/actions/setup/
 
       - name: Run tests
         run: pnpm test
