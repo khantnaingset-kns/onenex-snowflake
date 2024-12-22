@@ -8,7 +8,7 @@
  * @interface DeconstructedSnowflake
  */
 
-interface DeconstructedSnowflake {
+declare interface DeconstructedSnowflake {
   timestamp: number;
   shard_id: number;
   sequence: number;
