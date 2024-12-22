@@ -55,7 +55,7 @@ the maximum speed of a single processor on your system.
 #### Simple Generation
 
 ```javascript
-import { snowflake } from "@onenex/snowflake";
+import { snowflake } from "@onenex-snowflake";
 
 console.log(snowflake.generate());
 // 6917062538869867520
@@ -64,7 +64,7 @@ console.log(snowflake.generate());
 #### Shorter Version of Snowflake Generation
 
 ```javascript
-import { snowflake } from "@onenex/snowflake";
+import { snowflake } from "@onenex-snowflake";
 
 console.log(snowflake.generateShortId());
 // 71792129
@@ -73,14 +73,14 @@ console.log(snowflake.generateShortId());
 #### Advanced Generation
 
 ```javascript
-import { snowflake } from "@onenex/snowflake";
+import { snowflake } from "@onenex-snowflake";
 
 console.log(snowflake.generate({ timestamp: 1649156222074 }));
 // 6917062538869867520
 ```
 
 ```javascript
-import { snowflake } from "@onenex/snowflake";
+import { snowflake } from "@onenex-snowflake";
 
 console.log(snowflake.generate({ timestamp: 1649157035498, shard_id: 4 }));
 // 6917065950617407488
