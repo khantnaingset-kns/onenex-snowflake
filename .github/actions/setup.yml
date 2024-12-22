@@ -1,0 +1,33 @@
+name: "Setup"
+description: "Collection of common setup actions"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: "20.x"
+
+    - name: Setup Pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: 9
+
+    - name: Get pnpm cache directory path
+      id: pnpm-cache-dir-path
+      run: echo "::set-output name=dir::$(pnpm store path)"
+
+    - name: Cache node modules
+      id: cache-pnpm
+      uses: actions/cache@v3
+      with:
+        path: $ {{ steps.pnpm-cache-dir-path.outputs.dir }}
+        key: ${{ runner.os }}-build-${{ env.cache-name }}\
+          -${{ hashFiles('**/package-lock.json') }}
+
+    - name: Install dependencies
+      run: pnpm install --frozen-lockfile
