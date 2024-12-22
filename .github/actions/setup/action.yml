@@ -22,14 +22,14 @@ runs:
       id: pnpm-cache-dir-path
       run: echo "::set-output name=dir::$(pnpm store path)"
 
-    - name: Cache node modules
-      id: cache-pnpm
+    - name: Cache or Restore node modules
+      id: cache-or-restore
       uses: actions/cache@v3
       with:
         path: $ {{ steps.pnpm-cache-dir-path.outputs.dir }}
-        key: ${{ runner.os }}-build-${{ env.cache-name }}\
-          -${{ hashFiles('**/package-lock.json') }}
+        key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
 
     - name: Install dependencies
+      if: steps.pnpm-cache-dir-path.outputs.cache-hit != 'true'
       shell: bash
       run: pnpm install --frozen-lockfile
