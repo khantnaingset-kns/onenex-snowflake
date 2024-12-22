@@ -11,6 +11,7 @@ runs:
       uses: actions/setup-node@v4
       with:
         node-version: "22.x"
+        registry-url: "https://registry.npmjs.org"
 
     - name: Setup Pnpm
       uses: pnpm/action-setup@v4
