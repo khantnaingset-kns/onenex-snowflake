@@ -27,7 +27,7 @@ runs:
       uses: actions/cache@v3
       with:
         path: $ {{ steps.pnpm-cache-dir-path.outputs.dir }}
-        key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
+        key: ${{ runner.os }}-build-${{ hashFiles('**/pnpm-lock.yaml') }}
 
     - name: Install dependencies
       if: steps.pnpm-cache-dir-path.outputs.cache-hit != 'true'
